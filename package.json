@@ -1,0 +1,35 @@
+{
+  "name": "api-carteira-criptomoedas",
+  "version": "1.0.0",
+  "description": "api que funciona como carteira de criptomoedas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adson-SO/api-carteira-criptomoedas.git"
+  },
+  "keywords": [
+    "api",
+    "criptomoedas"
+  ],
+  "author": "Adson Sousa de Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adson-SO/api-carteira-criptomoedas/issues"
+  },
+  "homepage": "https://github.com/adson-SO/api-carteira-criptomoedas#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mysql2": "^2.3.3",
+    "path": "^0.12.7",
+    "sequelize": "^6.12.5",
+    "sequelize-cli": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
