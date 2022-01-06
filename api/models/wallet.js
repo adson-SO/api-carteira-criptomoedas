@@ -11,14 +11,34 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       wallet.hasMany(models.coin, {
-        foreignKey: 'walletAddress'
+        foreignKey: 'walletId'
       });
     }
   };
   wallet.init({
-    name: DataTypes.STRING,
-    cpf: DataTypes.STRING,
-    birthdate: DataTypes.DATEONLY
+    name: {
+        type: DataTypes.STRING,
+        validate: {
+          valida: function(dado) {
+            if(dado.length < 7) throw new Error('O campo nome não pode ter menos de 7 caracteres.');
+          }
+        }
+    },
+    cpf: {
+      type: DataTypes.STRING,
+      validate: {
+        is: {
+          args: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
+          msg: 'O campo cpf está com formato inválido.'
+        },
+        valida: function(dado) {
+          if(dado.length < 9) throw new Error('O campo cpf deve ter mais de 9 caracteres.');
+        }
+      }
+    },
+    birthdate: {
+      type: DataTypes.DATEONLY
+    }
   }, {
     sequelize,
     modelName: 'wallet'

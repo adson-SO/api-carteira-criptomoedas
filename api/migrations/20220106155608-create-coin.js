@@ -17,10 +17,10 @@ module.exports = {
       amount: {
         type: Sequelize.DOUBLE
       },
-      walletAddress: {
+      walletId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'wallet', key: 'address' }
+        references: { model: 'wallets', key: 'id' }
       },
       createdAt: {
         allowNull: false,

@@ -26,7 +26,7 @@ module.exports = {
       coinId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'coin', key: 'id' }
+        references: { model: 'coins', key: 'id' }
       },
       createdAt: {
         allowNull: false,
