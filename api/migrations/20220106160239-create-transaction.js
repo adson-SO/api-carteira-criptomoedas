@@ -23,6 +23,11 @@ module.exports = {
       currentCotation: {
         type: Sequelize.DOUBLE
       },
+      coinId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'coin', key: 'id' }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
