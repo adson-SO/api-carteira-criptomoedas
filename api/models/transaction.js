@@ -10,18 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      transaction.belongsTo(models.coin);
+      transaction.belongsTo(models.coin, {
+        foreignKey: 'coinId'
+      });
     }
   };
   transaction.init({
     value: DataTypes.DOUBLE,
-    datetime: DataTypes.DATE,
     sendTo: DataTypes.INTEGER,
     receiveFrom: DataTypes.INTEGER,
     currentCotation: DataTypes.DOUBLE
   }, {
     sequelize,
     modelName: 'transaction',
+    createdAt: 'datetime'
   });
   return transaction;
 };

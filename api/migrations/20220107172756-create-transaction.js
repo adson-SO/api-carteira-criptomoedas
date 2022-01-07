@@ -11,9 +11,6 @@ module.exports = {
       value: {
         type: Sequelize.DOUBLE
       },
-      datetime: {
-        type: Sequelize.DATE
-      },
       sendTo: {
         type: Sequelize.INTEGER
       },
@@ -24,13 +21,14 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       coinId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: { model: 'coins', key: 'id' }
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'datetime'
       },
       updatedAt: {
         allowNull: false,
