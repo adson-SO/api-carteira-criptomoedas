@@ -18,7 +18,10 @@ class WalletController {
                 include: {
                     attributes: { exclude: ['id', 'createdAt', 'updatedAt', 'walletAddress'] },
                     model: database.coin,
-                    include: database.transaction
+                    include: {
+                        model: database.transaction,
+                        attributes: { exclude: ['id', 'coinId', 'walletAddress', 'updatedAt'] }
+                    }
                 }
             });
 
@@ -46,6 +49,35 @@ class WalletController {
             res.status(200).json(carteira);
         } catch (err) {
             res.status(404).json(err.message);
+        }
+    }
+
+    static async adicionaOuRemoveFundos(req, res) {
+        try {
+            const carteiraAddress = req.params.address;
+
+
+        } catch(err) {
+            res.status(404).json(err.message);
+        }
+    }
+
+    static async listaTransacoes(req, res) {
+        try {
+            const carteiraAddress = req.params.address;
+
+            const transacoes = await database.coin.findAll({
+                where: { walletAddress: carteiraAddress },
+                attributes: { exclude: ['id', 'fullname', 'amount', 'createdAt', 'updatedAt', 'walletAddress'] },
+                include: {
+                    model: database.transaction,
+                    attributes: { exclude: ['id', 'updatedAt', 'coinId', 'walletAddres'] }
+                }
+            });
+
+            res.status(200).json(transacoes);
+        } catch(err) {
+            res.status(500).json(err.message);
         }
     }
 
