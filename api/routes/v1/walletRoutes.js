@@ -7,6 +7,6 @@ router.get('/wallet/:address', WalletController.pegaUmaCarteira);
 router.put('/wallet/:address');
 router.post('/wallet/:address/transaction');
 router.get('/wallet/:address/transaction');
-router.delete('/wallet/:address');
+router.delete('/wallet/:address', WalletController.apagaCarteira);
 
 module.exports = router;

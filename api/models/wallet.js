@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       wallet.hasMany(models.coin, {
         foreignKey: 'walletAddress'
       });
+      wallet.hasMany(models.transaction, {
+        foreignKey: 'walletAddress'
+      });
     }
   };
   wallet.init({

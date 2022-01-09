@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       transaction.belongsTo(models.coin, {
         foreignKey: 'coinId'
       });
+      transaction.belongsTo(models.wallet, {
+        foreignKey: 'walletAddress'
+      });
     }
   };
   transaction.init({
