@@ -74,11 +74,14 @@ class WalletController {
         }
     }
 
-    static async adicionaOuRemoveFundos(req, res) {
+    static async atualizaCarteira(req, res) {
         try {
             const carteiraAddress = req.params.address;
+            const novasInfo = req.body;
 
+            await database.wallet.update(novasInfo, { where: { address: carteiraAddress } });
 
+            res.status(204).end();
         } catch (err) {
             res.status(404).json(err.message);
         }
