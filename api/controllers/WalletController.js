@@ -1,4 +1,5 @@
 const database = require('../models');
+const { Op } = require('sequelize');
 
 class WalletController {
     static async criaCarteira(req, res) {
@@ -14,7 +15,28 @@ class WalletController {
 
     static async pegaTodasAsCarteiras(req, res) {
         try {
-            const todasAsCarteiras = await database.wallet.findAll({
+            const { name, cpf, birthdate, amount, createdAt, updatedAt } = req.query;
+            const where = {}
+
+            name ? where.name = {} : null;
+            name ? where.name[Op.eq] = name : null;
+
+            cpf ? where.cpf = {} : null;
+            cpf ? where.cpf[Op.eq] = cpf : null;
+
+            birthdate ? where.birthdate = {} : null;
+            birthdate ? where.birthdate[Op.eq] = birthdate : null;
+
+            amount ? where.amount = {} : null;
+            amount ? where.amount[Op.eq] = amount : null;
+
+            createdAt ? where.createdAt = {} : null;
+            createdAt ? where.createdAt[Op.eq] = createdAt : null;
+
+            updatedAt ? where.updatedAt = {} : null;
+            updatedAt ? where.updatedAt[Op.eq] = updatedAt : null;
+
+            const todasAsCarteiras = await database.wallet.findAll({ where,
                 include: {
                     attributes: { exclude: ['id', 'createdAt', 'updatedAt', 'walletAddress'] },
                     model: database.coin,
@@ -57,7 +79,7 @@ class WalletController {
             const carteiraAddress = req.params.address;
 
 
-        } catch(err) {
+        } catch (err) {
             res.status(404).json(err.message);
         }
     }
@@ -76,7 +98,7 @@ class WalletController {
             });
 
             res.status(200).json(transacoes);
-        } catch(err) {
+        } catch (err) {
             res.status(500).json(err.message);
         }
     }

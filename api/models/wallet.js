@@ -39,15 +39,21 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         is: {
           args: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
-          msg: 'O campo cpf está com formato inválido.'
+          msg: 'O campo cpf está com formato inválido. Siga esse formato: XXX.XXX.XXX-XX'
         },
         valida: function (dado) {
-          if (dado.length < 9) throw new Error('O campo cpf deve ter mais de 9 caracteres.');
+          if (dado.length < 14) throw new Error('O campo cpf está com formato inválido. Siga esse formato: XXX.XXX.XXX-XX');
         }
       }
     },
     birthdate: {
-      type: DataTypes.DATEONLY
+      type: DataTypes.DATEONLY,
+      validate: {
+        isBefore: {
+          args: '2004-01-09',
+          msg: 'Usuário deve ter mais de 18 anos de idade.'
+        }
+      }
     }
   }, {
     sequelize,
